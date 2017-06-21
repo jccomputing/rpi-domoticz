@@ -44,6 +44,7 @@ RUN apk add --no-cache git \
 	 coreutils \
 	 zlib zlib-dev \
 	 udev eudev-dev \
+	 python3 \
 	 python3-dev \
 	 linux-headers && \
 	 cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && \
