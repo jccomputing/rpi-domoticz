@@ -1,4 +1,4 @@
-FROM alpine:3.4
+FROM resin/armhf-alpine:3.4
 MAINTAINER Sylvain Desbureaux <sylvain@desbureaux.fr> #Original creator of this Dockerfile
 MAINTAINER Cedric Gatay <c.gatay@code-troopers.com>
 MAINTAINER Jean-Claude Computing <jeanclaude.computing@gmail.com>
