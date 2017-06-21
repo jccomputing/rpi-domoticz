@@ -49,13 +49,13 @@ RUN apk add --no-cache git \
 	 cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && \
 	 git clone --depth 2 https://github.com/OpenZWave/open-zwave.git /src/open-zwave && \
 	 cd /src/open-zwave && \
-	 make && \
+	 make -j$(nproc) && \
 	 ln -s /src/open-zwave /src/open-zwave-read-only && \
 	 git clone -b ${BRANCH_NAME:-master} --depth 2 https://github.com/domoticz/domoticz.git /src/domoticz && \
 	 cd /src/domoticz && \
 	 git fetch --unshallow && \
 	 cmake -DCMAKE_BUILD_TYPE=Release . && \
-	 make && \
+	 make -j$(nproc) && \
 	 rm -rf /src/domoticz/.git && \
 	 rm -rf /src/open-zwave/.git && \
 	 apk del git tzdata cmake linux-headers libusb-dev zlib-dev openssl-dev boost-dev sqlite-dev build-base eudev-dev coreutils curl-dev python3-dev
