@@ -29,6 +29,18 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.license="GPLv3" \
       org.label-schema.build-date=$BUILD_DATE
 
+RUN apk add --no-cache \
+	 libssl1.0 \
+	 boost-thread \
+	 boost-system \
+	 boost-date_time \
+	 sqlite \
+	 curl libcurl \
+	 libusb \
+	 zlib \
+	 udev \
+	 python3
+
 RUN apk add --no-cache --virtual build-dependencies \
 	 git \
 	 tzdata \
@@ -44,17 +56,6 @@ RUN apk add --no-cache --virtual build-dependencies \
 	 coreutils \
 	 curl-dev \
 	 python3-dev && \
-	 apk add --no-cache \
-	 libssl1.0 \
-	 boost-thread \
-	 boost-system \
-	 boost-date_time \
-	 sqlite \
-	 curl libcurl \
-	 libusb \
-	 zlib \
-	 udev \
-	 python3 && \
 	 cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && \
 	 git clone --depth 2 https://github.com/OpenZWave/open-zwave.git /src/open-zwave && \
 	 cd /src/open-zwave && \
