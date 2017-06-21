@@ -29,24 +29,32 @@ LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.license="GPLv3" \
       org.label-schema.build-date=$BUILD_DATE
 
-RUN apk add --no-cache git \
+RUN apk add --no-cache --virtual build-dependencies \
 	 git \
 	 tzdata \
-	 libssl1.0 openssl-dev \
-	 build-base cmake \
+	 cmake \
+	 linux-headers \
+	 libusb-dev \
+	 zlib-dev \
+	 openssl-dev \
 	 boost-dev \
+	 sqlite-dev \
+	 build-base \
+	 eudev-dev \
+	 coreutils \
+	 curl-dev \
+	 python3-dev && \
+	 apk add --no-cache \
+	 libssl1.0 \
 	 boost-thread \
 	 boost-system \
 	 boost-date_time \
-	 sqlite sqlite-dev \
-	 curl libcurl curl-dev \
-	 libusb libusb-dev \
-	 coreutils \
-	 zlib zlib-dev \
-	 udev eudev-dev \
-	 python3 \
-	 python3-dev \
-	 linux-headers && \
+	 sqlite \
+	 curl libcurl \
+	 libusb \
+	 zlib \
+	 udev \
+	 python3 && \
 	 cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && \
 	 git clone --depth 2 https://github.com/OpenZWave/open-zwave.git /src/open-zwave && \
 	 cd /src/open-zwave && \
@@ -59,7 +67,7 @@ RUN apk add --no-cache git \
 	 make -j$(nproc) && \
 	 rm -rf /src/domoticz/.git && \
 	 rm -rf /src/open-zwave/.git && \
-	 apk del git tzdata cmake linux-headers libusb-dev zlib-dev openssl-dev boost-dev sqlite-dev build-base eudev-dev coreutils curl-dev python3-dev
+	 apk del build-dependencies
 
 VOLUME /config
 
