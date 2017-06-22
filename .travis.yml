@@ -8,7 +8,7 @@ script:
 # build image
 - docker build --build-arg VCS_REF=$TRAVIS_COMMIT --build-arg BUILD_DATE=$(date +"%Y-%m-%dT%H:%M:%SZ") -t jccomputing/rpi-domoticz .
 # test image
-- docker run --entrypoint /src/domoticz/domoticz jccomputing/rpi-domoticz
+- docker run --entrypoint /src/domoticz/domoticz jccomputing/rpi-domoticz --help
 # push image
 - >-
   if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
